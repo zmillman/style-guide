@@ -43,14 +43,14 @@ console.log(foo[0], bar[0]); // => 9, 9
 **[[⬆]](#table-of-contents)**
 
 
-## Resources</a>
+## Resources
 
 See [JavaScript resources](javascript.md#resources).
 
 **[[⬆]](#table-of-contents)**
 
 
-## <a id=license>License</a>
+## License
 
 (The MIT License)
 

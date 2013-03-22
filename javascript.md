@@ -124,7 +124,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-This document forked from the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript). [View Contributors](https://github.com/airbnb/javascript/graphs/contributors)
+This document forked from the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript).
 
 (The MIT License)
 

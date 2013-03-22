@@ -1,52 +1,53 @@
 # Lever JavaScript Style Guide
 
-## <a id=toc>Table of contents</a>
+## Table of contents
 
   1. [File structure](#file-structure)
   1. [Resources](#resources)
   1. [License](#license)
 
-## <a id=file-structure>File structure</a>
+## File structure
 
-  - **Primitives**: When you access a primitive type you work directly on its value
+**Primitives**: When you access a primitive type you work directly on its value
 
-    + `string`
-    + `number`
-    + `boolean`
-    + `null`
-    + `undefined`
+  - `string`
+  - `number`
+  - `boolean`
+  - `null`
+  - `undefined`
 
-    ```javascript
-    var foo = 1,
-        bar = foo;
+```javascript
+var foo = 1,
+    bar = foo;
 
-    bar = 9;
+bar = 9;
 
-    console.log(foo, bar); // => 1, 9
-    ```
-  - **Complex**: When you access a complex type you work on a reference to its value
+console.log(foo, bar); // => 1, 9
+```
 
-    + `object`
-    + `array`
-    + `function`
+**Complex**: When you access a complex type you work on a reference to its value
 
-    ```javascript
-    var foo = [1, 2],
-        bar = foo;
+  - `object`
+  - `array`
+  - `function`
 
-    bar[0] = 9;
+```javascript
+var foo = [1, 2],
+    bar = foo;
 
-    console.log(foo[0], bar[0]); // => 9, 9
-    ```
+bar[0] = 9;
 
-    **[[⬆]](#toc)**
+console.log(foo[0], bar[0]); // => 9, 9
+```
+
+**[[⬆]](#table-of-contents)**
 
 
-## <a id=resources>Resources</a>
+## Resources</a>
 
 See [JavaScript resources](javascript.md#resources).
 
-**[[⬆]](#toc)**
+**[[⬆]](#table-of-contents)**
 
 
 ## <a id=license>License</a>
@@ -74,4 +75,4 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-**[[⬆]](#toc)**
+**[[⬆]](#table-of-contents)**

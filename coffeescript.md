@@ -341,7 +341,7 @@ Installing [DocBlockr](https://github.com/spadgos/sublime-jsdocs) is recommended
 
 In CoffeeScript, block comments that get passed through use triple-hashes, so a JSDoc annoation in CoffeeScript looks like:
 
-```
+``` coffeescript
 ###*
  * A tasty treat with a hole
  * @param {string} flavor Name of the flavor

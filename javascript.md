@@ -134,36 +134,36 @@ expressApp
 Do not vertically align items in consecutive lines.
 
 ``` javascript
-# No
+// No
 var x        = 0;
 var y        = 0;
 var position = 'top';
 
-# No
+// No
 var magicWords = [
                    'abracadabra'
                    'gesundheit'
                    'ventrilo'
                  ];
 
-# No
+// No
 var message = (regExp.test(text)) ?
               'You have a match!' :
               'No match';
 
-# Yes
+// Yes
 var x = 0;
 var y = 0;
 var position = 'top';
 
-# Yes
+// Yes
 var magicWords = [
   'abracadabra'
   'gesundheit'
   'ventrilo'
 ];
 
-# Yes
+// Yes
 var message = (regExp.test(text)) ?
   'You have a match!' :
   'No match';
@@ -388,11 +388,11 @@ Place require statements at the top of a file. Group them in the following order
 When using imported functions, don't destructure them at the top of the file. This can make it harder for others to figure out the context of the function when they are reading the code later.
 
 ``` javascript
-# No
+// No
 {join} = require 'path'
 join __dirname, '/foo'
 
-# Yes
+// Yes
 path = require 'path'
 path.join __dirname, '/foo'
 ```

@@ -374,18 +374,26 @@ V8 and modern JavaScript compilers can better optimize code when objects follow 
 
 Thus, when objects are created with a regular set of properties, using a constructor is preferred to object literals. This is especially important for long-lived objects and objects that act as maps, since these are more likely to be involved in memory leaks. However, using object literals is OK for boxing up multiple arguments to get immediately parsed out and irregular blobs of data.
 
-For performance reasons, the properties of a typed object should not be changed after instantiation. New properties should not be added dynamically, and properties should not be removed with a `delete` statement. Instead, properties that are only sometimes existant should be initialized to `null` and cleared via a set to `null`. Adding properties dynamically and `delete` should ideally only be used on objects that act as maps.
+For performance reasons, the properties of a typed object should not be changed after instantiation. New properties should not be added dynamically, and properties should not be removed with a `delete` statement. Instead, properties that are only sometimes existant should be initialized to `null` in the constructor and cleared via a set to `null`. Adding properties dynamically and `delete` should ideally only be used on objects that act as maps.
 
 Arrays should be avoided as containers of mixed values, and they should only be used to contain lists of a single type.
 
 ``` coffeescript
   # No
+
+  # Constructors are preferred even for singleton objects and simple map
+  # objects so that they have type names in the memory profiler
   library =
     isbnMap: {}
 
+  # Prototypes are preferred to dynamically adding methods
   library.add = (book) ->
     @isbnMap[book.isbn] = book
+    # Avoid dynamically adding or removing properties of a typed object
+    book.currentLibrary = this
 
+  # A constructor should be used for greater efficiency, better profiling,
+  # and to make it more explicit what are the optional and required fields
   library.add {
     isbn: '978-1470178192'
     title: 'Moby Dick'
@@ -393,20 +401,33 @@ Arrays should be avoided as containers of mixed values, and they should only be 
   }
 
   # Yes
-  Book = (@isbn, @title, @author) ->
+
+  Book = (@isbn, options = {}) ->
+    @title = options.title
+    @author = options.author
+    # Make sure to initialize all properties that a typed object can have in
+    # the constructor. Set properties to `null` if there is no default value
+    @currentLibrary = null
+    return
+
   IsbnMap = ->
+
   Library = ->
     @isbnMap = new IsbnMap
+    return
 
   Library::add = (book) ->
     @isbnMap[book.isbn] = book
+    book.currentLibrary = this
 
   library = new Library
 
-  isbn = '978-1470178192'
-  title = 'Moby Dick'
-  author = 'Herman Melville'
-  library.add new Book(isbn, title, author)
+  # This options object literal is fine, because it is immediately parsed
+  # out and can be easily garbage collected
+  library.add new Book '978-1470178192', {
+    title: 'Moby Dick'
+    author: 'Herman Melville'
+  }
 ```
 
 **[[⬆]](#table-of-contents)**
@@ -492,7 +513,7 @@ Place require statements at the top of a file. Group them in the following order
   2. Third party library imports
   3. Local imports
 
-When using imported functions, don't destructure them at the top of the file.
+When using imported functions, don't destructure them at the top of the file. This can make it harder for others to figure out the context of the function when they are reading the code later.
 
 ``` coffeescript
   # No

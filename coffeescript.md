@@ -185,7 +185,7 @@ launch spaceship, coordinates
 
 name = model.get 'name'
 
-return cb err if err
+return cb? err if err
 
 # Parentheses included
 

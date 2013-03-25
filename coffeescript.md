@@ -59,11 +59,11 @@ eatEach = (items) ->
 
 ## Naming
 
-  - **lowerCamelCase** - Local variables and functions as well as public properties or functions
-  - **_underscoreCamelCase** - Internal properties or functions
-  - **UpperCamelCase** - Constructor functions
-  - **SCREAMING_SNAKE_CASE** - Constants
-  - **dashed-lower** - HTML ids, classes, and attribute names
+  - `lowerCamelCase` - Local variables and functions as well as public properties or functions
+  - `_underscoreCamelCase` - Internal properties or functions
+  - `UpperCamelCase` - Constructor functions
+  - `SCREAMING_SNAKE_CASE` - Constants
+  - `dashed-lower-case` - HTML ids, classes, and attribute names
 
 When camelcasing acronyms, always treat them like words. For example: `htmlSection` or `newHtml`
 

@@ -523,7 +523,8 @@ var TIMEOUT = 1000;
 module.exports = Fruit;
 Fruit.TIMEOUT = TIMEOUT;
 
-function Fruit(@name) {
+function Fruit(name) {
+  this.name = name;
   this.ripeness = 0;
 }
 

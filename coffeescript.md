@@ -338,6 +338,49 @@ files.forEach (filename) ->
 
 See [JavaScript Style Guide](javascript.md#modules).
 
+### Modules that export an object
+
+Modules that export an object only use `exports` and they do NOT use `module.exports`. All exported functions are exported where they are defined. Use of exported functions in the same file also refer to the function as `exports.xxx`.
+
+**`fruits.coffee`**
+
+``` javascript
+util = require 'util'
+fs = require 'fs'
+
+exports.CONSTANT = CONSTANT = 1000
+
+exports.ripen = (fruit, amount) ->
+  fruit.ripeness *= amount
+
+exports.ripenEach = (fruits, amount) ->
+  for fruit in fruits
+    exports.ripen fruit, amount
+  return
+```
+
+### Modules that export a function or constructor
+
+Modules that export a single function always export using `module.exports = <name> =`. The function should then be extended by name and not using `exports`.
+
+**`Fruit.coffee`**
+
+``` javascript
+util = require 'util'
+fs = require 'fs'
+
+CONSTANT = 1000
+
+module.exports = Fruit = (@name) ->
+  @ripeness = 0
+  return
+
+Fruit.CONSTANT = CONSTANT
+
+Fruit::isRipe = ->
+  return @ripeness > 0.5
+```
+
 **[[⬆]](#table-of-contents)**
 
 

@@ -26,12 +26,12 @@
   - `new Object`
   - `__proto__`
   - Modifying native objects or their prototypes
-  - The comma operator, except in `for` loop statements
+  - The comma operator, except with `for` loops
   - Bit math and clever optimizations
 
 ### Gotchas
 
-JavaScript is full of them! Avoid being clever. If you wonder whether something works the way you wrote it, rewrite it with simpler syntax.
+JavaScript is full of them! Avoid being clever. If you wonder whether something works or need to read a line twice, rewrite with simpler syntax.
 
 Avoid declaring functions inside of a block, such as a conditional. This is undefined behavior, and browsers handle it differently. Instead, assign the function to a variable.
 
@@ -55,11 +55,11 @@ Avoid implicit type coercion, especially with `==` and `!=`. Instead, always use
 
 Be careful when adding numbers to explicitly cast to a number type. Otherwise, you might accidentally perform string concatenation if one of the arguments is a string.
 
-Use a null check of `if (value != null)` instead of `if (value)` when `value` can be any number. It is easy to forget that zero is falsey.
+Use a null check of `if (value == null)` instead of `if (!value)` when `value` can be any number. It is easy to forget that zero is falsey.
+
+All JavaScript numbers are doubles. Be careful when using large integers, doing decimal math, and when casting numbers to and from strings. Bit operators act like 32-bit signed integers, which can lead to unexpected results.
 
 `NaN` is the only value in JavaScript that does not equal itself.
-
-All JavaScript numbers are doubles. Be careful when using large integers, doing decimal math, and when casting numbers to and from strings. Bit operators are 32-bit, which can lead to unexpected results.
 
 **[[⬆]](#table-of-contents)**
 
@@ -85,6 +85,7 @@ Generic abbreviations:
   - `err` - Error arguments in callbacks and catch
   - `cb` - Callback
   - `i` - Index
+  - `len` - Length
   - `e` - HTML event object
   - `el` - HTML element
   - `fn` - Variable representing a function
@@ -98,6 +99,13 @@ Abbreviations especially for use in Share and Racer:
   - `db` - Database
 
 When iterators are nested or functions that take a callback are nested, use specific names for the different callbacks or indices.
+
+### Spelling
+
+Use U.S. English spelling. For words with ambiguous spelling, use the spelling in the following list:
+
+  - `indices`, not indexes
+  - `referrer`, not referer, except in HTTP headers where it is customarily mispelled
 
 **[[⬆]](#table-of-contents)**
 
@@ -174,7 +182,64 @@ var message = (regExp.test(text)) ?
 
 ## Punctuation
 
+### Quotes
+
 Prefer single quoted strings (`''`) instead of double quoted (`""`) strings.
+
+### Semicolons
+
+End all statements with semicolons.
+
+### Commas
+
+Use leading commas.
+
+``` javascript
+var names = [
+  'Judy'
+, 'Walt'
+, 'Ben'
+, 'Susan'
+, 'Kim'
+];
+```
+
+### Variable declarations
+
+Use one `var` for each variable declaration, and declare it where the variable is first used in the function. This makes it easier to refactor code and make sure that each variable is properly declared as local.
+
+When initializing the same variable in independent sections, redeclare it in each section. This is especially desired for loop iterators.
+
+``` javascript
+// No
+var keys = ['foo', 'bar']
+  , values = [23, 42]
+  , object = {}
+  , i, len, key;
+
+for (i = values.length; i--;) {
+  values[i] = values[i] * 2;
+}
+
+for (i = 0, len = values.length; i < len; i++) {
+  key = keys[i];
+  object[key] = values[i];
+}
+
+// Yes
+var keys = ['foo', 'bar'];
+var values = [23, 42];
+
+for (var i = values.length; i--;) {
+  values[i] = values[i] * 2;
+}
+
+var object = {};
+for (var i = 0, len = values.length; i < len; i++) {
+  var key = keys[i];
+  object[key] = values[i];
+}
+```
 
 **[[⬆]](#table-of-contents)**
 
@@ -377,6 +442,15 @@ library.add(book);
 
 Use the Node.js module convention for both server and client code. Each module is a file. Modules may export an object with stateless methods, a single function, or a constructor.
 
+### Files
+
+All files should be written in the following order:
+
+  1. Require statements
+  2. Constant definitions
+  3. Exports declarations
+  4. Implementation
+
 ### Requires
 
 Place require statements at the top of a file. Group them in the following order:
@@ -389,12 +463,14 @@ When using imported functions, don't destructure them at the top of the file. Th
 
 ``` javascript
 // No
-{join} = require 'path'
-join __dirname, '/foo'
+var join = require('path').join;
+...
+join(__dirname, '/foo');
 
 // Yes
-path = require 'path'
-path.join __dirname, '/foo'
+var path = require('path');
+...
+path.join(__dirname, '/foo');
 ```
 
 ### Modules that export an object
@@ -405,35 +481,55 @@ They only export stateless functions and global constants shared among all insta
 
 Modules that export an object only use `exports` and they do NOT use `module.exports`. All exported functions are exported where they are defined. Use of exported functions in the same file also refer to the function as `exports.xxx`.
 
-**`fruits.coffee`**
+**`fruits.js`**
 
 ``` javascript
-exports.TIMEOUT = 1000
+var util = require('util');
+var fs = require('fs');
 
-exports.ripen = (fruit, amount) ->
-  fruit.ripeness *= amount
+var TIMEOUT = 1000;
 
-exports.ripenEach = (fruits, amount) ->
-  for fruit in fruits
-    exports.ripen fruit, amount
-  return
+module.exports = {
+  TIMEOUT: TIMEOUT
+, ripen: ripen
+, ripenEach: ripenEach
+};
+
+function ripen(fruit, amount) {
+  fruit.ripeness *= amount;
+}
+
+function ripenEach(fruits, amount) {
+  for (var i = 0, len = fruits.length; i < len; i++) {
+    ripen(fruit, amount);
+  }
+}
 ```
 
 ### Modules that export a function or constructor
 
 Modules that export a function or constructor are named the same thing as the function they export. Modules exporting a constructor start with an uppercase character.
 
-They always export using `exports = module.exports =`.
+They always export using `module.exports = <name>`.
 
 **`Fruit.coffee`**
 
 ``` javascript
-exports = module.exports = (@name) ->
-  @ripeness = 0
-  return
+var util = require('util');
+var fs = require('fs');
 
-exports::isRipe = ->
-  return @ripeness > 0.5
+var TIMEOUT = 1000;
+
+module.exports = Fruit;
+Fruit.TIMEOUT = TIMEOUT;
+
+function Fruit(@name) {
+  this.ripeness = 0;
+}
+
+Fruit.prototype.isRipe = function() {
+  return this.ripeness > 0.5;
+};
 ```
 
 **[[⬆]](#table-of-contents)**

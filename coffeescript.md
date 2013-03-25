@@ -382,7 +382,7 @@ Arrays should be avoided as containers of mixed values, and they should only be 
 # No
 
 # Constructors are preferred even for singleton objects and simple map
-# objects so that they have type names in the memory profiler
+# objects. This gives them type names in the memory profiler
 library =
   isbnMap: {}
 

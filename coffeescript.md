@@ -37,15 +37,15 @@ CoffeeScript implicitly returns from every function and statement. This is a pro
 Color = (@name, @hex) ->
   @rgb = hexToRgb hex
 
-# Yes
-Color = (@name, @hex) ->
-  @rgb = hexToRgb hex
-  return
-
 # No
 eatEach = (items) ->
   for item in items
     eat item
+
+# Yes
+Color = (@name, @hex) ->
+  @rgb = hexToRgb hex
+  return
 
 # Yes
 eatEach = (items) ->
@@ -59,11 +59,11 @@ eatEach = (items) ->
 
 ## Naming
 
-  - *lowerCamelCase* - Local variables and functions as well as public properties or functions
-  - *_underscoreCamelCase* - Internal properties or functions
-  - *UpperCamelCase* - Constructor functions
-  - *SCREAMING_SNAKE_CASE* - Constants
-  - *dashed-lower* - HTML ids, classes, and attribute names
+  - **lowerCamelCase** - Local variables and functions as well as public properties or functions
+  - **_underscoreCamelCase** - Internal properties or functions
+  - **UpperCamelCase** - Constructor functions
+  - **SCREAMING_SNAKE_CASE** - Constants
+  - **dashed-lower** - HTML ids, classes, and attribute names
 
 When camelcasing acronyms, always treat them like words. For example: `htmlSection` or `newHtml`
 

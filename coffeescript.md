@@ -33,25 +33,25 @@
 CoffeeScript implicitly returns from every function and statement. This is a problem for constructor functions (which shouldn't return anything) and functions that might produce complex return values by accident. To avoid this problem, always write an explicit `return` at the end of function constructors and functions that end in a loop or conditional.
 
 ``` coffeescript
-  # No
-  Color = (@name, @hex) ->
-    @rgb = hexToRgb hex
+# No
+Color = (@name, @hex) ->
+  @rgb = hexToRgb hex
 
-  # Yes
-  Color = (@name, @hex) ->
-    @rgb = hexToRgb hex
-    return
+# Yes
+Color = (@name, @hex) ->
+  @rgb = hexToRgb hex
+  return
 
-  # No
-  eatEach = (items) ->
-    for item in items
-      eat item
+# No
+eatEach = (items) ->
+  for item in items
+    eat item
 
-  # Yes
-  eatEach = (items) ->
-    for item in items
-      eat item
-    return
+# Yes
+eatEach = (items) ->
+  for item in items
+    eat item
+  return
 ```
 
 **[[⬆]](#table-of-contents)**
@@ -107,63 +107,63 @@ When iterators are nested or functions that take a callback are nested, use spec
 Indent statements continued between lines one level (two spaces). Place operators that continue a line at the end of the line.
 
 ``` coffeescript
-  greeting = if isNew
-      'Welcome!'
-    else
-      'Welcome back!'
+greeting = if isNew
+    'Welcome!'
+  else
+    'Welcome back!'
 
-  farewell = 'Come back to our place soon ' +
-    user.firstName
+farewell = 'Come back to our place soon ' +
+  user.firstName
 ```
 
 In chained method calls that don't fit on a single line, place each call on a separate line and indented by one level, with a leading `.`.
 
 ```coffeescript
-  [1..3]
-    .map((x) -> x * x)
-    .concat([10..12])
-    .filter((x) -> x < 11)
-    .reduce((x, y) -> x + y)
+[1..3]
+  .map((x) -> x * x)
+  .concat([10..12])
+  .filter((x) -> x < 11)
+  .reduce((x, y) -> x + y)
 ```
 
 Do not vertically align items in consecutive lines.
 
 ``` coffeescript
-  # No
-  x        = 0
-  y        = 0
-  position = 'top'
+# No
+x        = 0
+y        = 0
+position = 'top'
 
-  # No
-  magicWords = [
-                 'abracadabra'
-                 'gesundheit'
-                 'ventrilo'
-               ]
+# No
+magicWords = [
+               'abracadabra'
+               'gesundheit'
+               'ventrilo'
+             ]
 
-  # No
-  message = if regExp.test text
-              'You have a match!'
-            else
-              'No match'
+# No
+message = if regExp.test text
+            'You have a match!'
+          else
+            'No match'
 
-  # Yes
-  x = 0
-  y = 0
-  position = 'top'
+# Yes
+x = 0
+y = 0
+position = 'top'
 
-  # Yes
-  magicWords = [
-    'abracadabra'
-    'gesundheit'
-    'ventrilo'
-  ]
+# Yes
+magicWords = [
+  'abracadabra'
+  'gesundheit'
+  'ventrilo'
+]
 
-  # Yes
-  message = if regExp.test text
-      'You have a match!'
-    else
-      'No match'
+# Yes
+message = if regExp.test text
+    'You have a match!'
+  else
+    'No match'
 ```
 
 **[[⬆]](#table-of-contents)**
@@ -176,77 +176,77 @@ Prefer single quoted strings (`''`) instead of double quoted (`""`) strings, unl
 Omit parentheses around function calls that begin an expression. However, when nesting or at all ambiguous, use parentheses for clarity.
 
 ``` coffeescript
-  # Parentheses omitted
+# Parentheses omitted
 
-  app.get '/', (req, res) ->
-    res.send 'Hi!'
+app.get '/', (req, res) ->
+  res.send 'Hi!'
 
-  launch spaceship, coordinates
+launch spaceship, coordinates
 
-  name = model.get 'name'
+name = model.get 'name'
 
-  return cb err if err
+return cb err if err
 
-  # Parentheses included
+# Parentheses included
 
-  out = Math.max 0, Math.min(1, value)
+out = Math.max 0, Math.min(1, value)
 
-  text = prefix + model.get('message')
+text = prefix + model.get('message')
 ```
 
 Do not use Lisp-like function grouping style.
 
 ``` coffeescript
-  # No
-  text = prefix + (model.get 'message')
+# No
+text = prefix + (model.get 'message')
 ```
 
 Do not use parentheses when declaring functions that accept no arguments.
 
 ``` coffeescript
-  # No
-  bar = () ->
-  # Yes
-  bar = ->
+# No
+bar = () ->
+# Yes
+bar = ->
 ```
 
 Use curly braces when creating object literals on a single line. While this is optional in CoffeScript, we think it is generally more clear and readable to include the curly braces.
 
 ``` coffeescript
-  # No
-  singers = Jagger: "Rock", Elvis: "Roll"
-  client = createClient port: 3000
+# No
+singers = Jagger: "Rock", Elvis: "Roll"
+client = createClient port: 3000
 
-  # Yes
-  singers = {Jagger: "Rock", Elvis: "Roll"}
-  client = createClient {port: 3000}
+# Yes
+singers = {Jagger: "Rock", Elvis: "Roll"}
+client = createClient {port: 3000}
 ```
 
 Use `@property` instead of `this.property`.
 
 ``` coffeescript
-  # No
-  this.property
-  # Yes
-  @property
+# No
+this.property
+# Yes
+@property
 ```
 
 However, avoid using **standalone** `@`:
 
 ``` coffeescript
-  # No
-  return @
-  # Yes
-  return this
+# No
+return @
+# Yes
+return this
 ```
 
 Prefer shorthand notation (`::`) for accessing an object's prototype:
 
 ``` coffeescript
-  # No
-  Array.prototype.slice
-  # Yes
-  Array::slice
+# No
+Array.prototype.slice
+# Yes
+Array::slice
 ```
 
 **[[⬆]](#table-of-contents)**
@@ -265,14 +265,14 @@ Each line of a block comment starts with a `#` and a single space, and should be
 Paragraphs inside of block comments are separated by a line containing a single `#`.
 
 ``` coffeescript
-  # This is a block comment. Note that if this were a real block
-  # comment, we would actually be describing the proceeding code.
-  #
-  # This is the second paragraph of the same block comment. Note
-  # that this paragraph was separated from the previous paragraph
-  # by a line containing a single comment character.
-  start()
-  stop()
+# This is a block comment. Note that if this were a real block
+# comment, we would actually be describing the proceeding code.
+#
+# This is the second paragraph of the same block comment. Note
+# that this paragraph was separated from the previous paragraph
+# by a line containing a single comment character.
+start()
+stop()
 ```
 
 ### Inline Comments
@@ -282,19 +282,19 @@ Place inline comments on the line immediately above the statements they are desc
 The use of inline comments should be limited, because their existence is typically a sign of a code smell. Especially do not use inline comments when they state the obvious.
 
 ``` coffeescript
-  # No
+# No
 
-  # Increment x
-  x = x + 1
+# Increment x
+x = x + 1
 ```
 
 However, inline comments can be useful in certain scenarios:
 
 ``` coffeescript
-  # Yes
+# Yes
 
-  # Compensate for border
-  x = x + 1
+# Compensate for border
+x = x + 1
 ```
 
 ### Annotations
@@ -306,17 +306,17 @@ Write the annotation on the line immediately above the code that the annotation 
 Follow the annotation keyword by a colon and a space, and a descriptive note.
 
 ```coffeescript
-  # FIXME: The client's current state should *not* affect payload processing.
-  resetClientState()
-  processPayload()
+# FIXME: The client's current state should *not* affect payload processing.
+resetClientState()
+processPayload()
 ```
 
 If multiple lines are required by the description, indent subsequent lines with two spaces:
 
 ```coffeescript
-  # TODO: Ensure that the value returned by this call falls within a certain
-  #   range, or throw an exception.
-  analyze()
+# TODO: Ensure that the value returned by this call falls within a certain
+#   range, or throw an exception.
+analyze()
 ```
 
 Annotation types:
@@ -379,55 +379,55 @@ For performance reasons, the properties of a typed object should not be changed 
 Arrays should be avoided as containers of mixed values, and they should only be used to contain lists of a single type.
 
 ``` coffeescript
-  # No
+# No
 
-  # Constructors are preferred even for singleton objects and simple map
-  # objects so that they have type names in the memory profiler
-  library =
-    isbnMap: {}
+# Constructors are preferred even for singleton objects and simple map
+# objects so that they have type names in the memory profiler
+library =
+  isbnMap: {}
 
-  # Prototypes are preferred to dynamically adding methods
-  library.add = (book) ->
-    @isbnMap[book.isbn] = book
-    # Avoid dynamically adding or removing properties of a typed object
-    book.currentLibrary = this
+# Prototypes are preferred to dynamically adding methods
+library.add = (book) ->
+  @isbnMap[book.isbn] = book
+  # Avoid dynamically adding or removing properties of a typed object
+  book.currentLibrary = this
 
-  # A constructor should be used for greater efficiency, better profiling,
-  # and to make it more explicit what are the optional and required fields
-  library.add {
-    isbn: '978-1470178192'
-    title: 'Moby Dick'
-    author: 'Herman Melville'
-  }
+# A constructor should be used for greater efficiency, better profiling,
+# and to make it more explicit what are the optional and required fields
+library.add {
+  isbn: '978-1470178192'
+  title: 'Moby Dick'
+  author: 'Herman Melville'
+}
 
-  # Yes
+# Yes
 
-  Book = (@isbn, options = {}) ->
-    @title = options.title
-    @author = options.author
-    # Make sure to initialize all properties that a typed object can have in
-    # the constructor. Set properties to `null` if there is no default value
-    @currentLibrary = null
-    return
+Book = (@isbn, options = {}) ->
+  @title = options.title
+  @author = options.author
+  # Make sure to initialize all properties that a typed object can have in
+  # the constructor. Set properties to `null` if there is no default value
+  @currentLibrary = null
+  return
 
-  IsbnMap = ->
+IsbnMap = ->
 
-  Library = ->
-    @isbnMap = new IsbnMap
-    return
+Library = ->
+  @isbnMap = new IsbnMap
+  return
 
-  Library::add = (book) ->
-    @isbnMap[book.isbn] = book
-    book.currentLibrary = this
+Library::add = (book) ->
+  @isbnMap[book.isbn] = book
+  book.currentLibrary = this
 
-  library = new Library
+library = new Library
 
-  # This options object literal is fine, because it is immediately parsed
-  # out and can be easily garbage collected
-  library.add new Book '978-1470178192', {
-    title: 'Moby Dick'
-    author: 'Herman Melville'
-  }
+# This options object literal is fine, because it is immediately parsed
+# out and can be easily garbage collected
+library.add new Book '978-1470178192', {
+  title: 'Moby Dick'
+  author: 'Herman Melville'
+}
 ```
 
 **[[⬆]](#table-of-contents)**
@@ -438,17 +438,17 @@ Arrays should be avoided as containers of mixed values, and they should only be 
 Always use `if` instead of `unless` when there is an `else`.
 
 ``` coffeescript
-  # No
-  unless false
-    ...
-  else
-    ...
+# No
+unless false
+  ...
+else
+  ...
 
-  # Yes
-  if true
-    ...
-  else
-    ...
+# Yes
+if true
+  ...
+else
+  ...
 ```
 
 **[[⬆]](#table-of-contents)**
@@ -459,43 +459,43 @@ Always use `if` instead of `unless` when there is an `else`.
 Prefer comprehensions for map and filter tasks.
 
 ``` coffeescript
-  # No
-  results = []
-  for item in array
-    results.push item.name
+# No
+results = []
+for item in array
+  results.push item.name
 
-  # No
-  results = array.map (item) -> item.name
+# No
+results = array.map (item) -> item.name
 
-  # Yes
-  results = (item.name for item in array)
+# Yes
+results = (item.name for item in array)
 ```
 
 Use for loops and not Array#forEach in cases where a closure wrapper is not needed.
 
 ``` coffeescript
-  # No
-  items.forEach (item) ->
-    console.log item
+# No
+items.forEach (item) ->
+  console.log item
 
-  # Yes
-  for item in items
-    console.log item
+# Yes
+for item in items
+  console.log item
 ```
 
 If a closure wrapper is needed when iterating over an array, use Array#forEach instead of the CoffeeScript `do` keyword.
 
 ``` coffeescript
-  # No
-  for filename in files
-    do (filename) ->
-      fs.readFile filename, (err, contents) ->
-        compile filename, contents.toString()
-
-  # Yes
-  files.forEach (filename) ->
+# No
+for filename in files
+  do (filename) ->
     fs.readFile filename, (err, contents) ->
       compile filename, contents.toString()
+
+# Yes
+files.forEach (filename) ->
+  fs.readFile filename, (err, contents) ->
+    compile filename, contents.toString()
 ```
 
 **[[⬆]](#table-of-contents)**
@@ -516,13 +516,13 @@ Place require statements at the top of a file. Group them in the following order
 When using imported functions, don't destructure them at the top of the file. This can make it harder for others to figure out the context of the function when they are reading the code later.
 
 ``` coffeescript
-  # No
-  {join} = require 'path'
-  join __dirname, '/foo'
+# No
+{join} = require 'path'
+join __dirname, '/foo'
 
-  # Yes
-  path = require 'path'
-  path.join __dirname, '/foo'
+# Yes
+path = require 'path'
+path.join __dirname, '/foo'
 ```
 
 ### Modules that export an object
@@ -536,15 +536,15 @@ Modules that export an object only use `exports` and they do NOT use `module.exp
 **`fruits.coffee`**
 
 ``` coffeescript
-  exports.TIMEOUT = 1000
+exports.TIMEOUT = 1000
 
-  exports.ripen = (fruit, amount) ->
-    fruit.ripeness *= amount
+exports.ripen = (fruit, amount) ->
+  fruit.ripeness *= amount
 
-  exports.ripenEach = (fruits, amount) ->
-    for fruit in fruits
-      exports.ripen fruit, amount
-    return
+exports.ripenEach = (fruits, amount) ->
+  for fruit in fruits
+    exports.ripen fruit, amount
+  return
 ```
 
 ### Modules that export a function or constructor
@@ -556,12 +556,12 @@ They always export using `exports = module.exports =`.
 **`Fruit.coffee`**
 
 ``` coffeescript
-  exports = module.exports = (@name) ->
-    @ripeness = 0
-    return
+exports = module.exports = (@name) ->
+  @ripeness = 0
+  return
 
-  exports::isRipe = ->
-    return @ripeness > 0.5
+exports::isRipe = ->
+  return @ripeness > 0.5
 ```
 
 **[[⬆]](#table-of-contents)**

@@ -83,7 +83,7 @@ farewell = 'Come back to our place soon ' +
 
 In chained method calls that don't fit on a single line, place each call on a separate line and indented by one level, with a leading `.`.
 
-```coffeescript
+``` coffeescript
 [1..3]
   .map((x) -> x * x)
   .concat([10..12])
@@ -344,7 +344,7 @@ Modules that export an object only use `exports` and they do NOT use `module.exp
 
 **`fruits.coffee`**
 
-``` javascript
+``` coffeescript
 util = require 'util'
 fs = require 'fs'
 
@@ -365,7 +365,7 @@ Modules that export a single function always export using `module.exports = <nam
 
 **`Fruit.coffee`**
 
-``` javascript
+``` coffeescript
 util = require 'util'
 fs = require 'fs'
 

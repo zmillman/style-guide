@@ -2,7 +2,7 @@
 
 ## [CoffeeScript](coffeescript.md)
 
-CoffeeScript is used for application development, component libraries, scripts, and quick prototypes. We generally beleive that CoffeeScript is more productive to read and write than JavaScript. Therefore, we use it for large code bases that change quickly.
+CoffeeScript is used for application development, component libraries, scripts, quick prototypes, and tests. We generally believe that CoffeeScript is more productive to read and write than JavaScript. Therefore, we use it for large code bases that change quickly.
 
 ## [JavaScript](javascript.md)
 

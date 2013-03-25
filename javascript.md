@@ -2,54 +2,17 @@
 
 ## Table of contents
 
-  1. [File structure](#file-structure)
   1. [Resources](#resources)
   1. [License](#license)
-
-## File structure
-
-**Primitives**: When you access a primitive type you work directly on its value
-
-  - `string`
-  - `number`
-  - `boolean`
-  - `null`
-  - `undefined`
-
-```javascript
-var foo = 1,
-    bar = foo;
-
-bar = 9;
-
-console.log(foo, bar); // => 1, 9
-```
-
-**Complex**: When you access a complex type you work on a reference to its value
-
-  - `object`
-  - `array`
-  - `function`
-
-```javascript
-var foo = [1, 2],
-    bar = foo;
-
-bar[0] = 9;
-
-console.log(foo[0], bar[0]); // => 9, 9
-```
-
-**[[⬆]](#table-of-contents)**
 
 
 ## Resources
 
-**Read This**
+### Read this
 
   - [Annotated ECMAScript 5.1](http://es5.github.com/)
 
-**Other Styleguides**
+### Other styleguides
 
   - [npm Coding Style](https://npmjs.org/doc/coding-style.html)
   - [Felix's Node.js Style Guide](http://nodeguide.com/style.html)
@@ -60,7 +23,7 @@ console.log(foo[0], bar[0]); // => 9, 9
   - [Crockford's Code Conventions for the JavaScript Programming Language](http://javascript.crockford.com/code.html)
   - [Dojo Style Guide](http://dojotoolkit.org/community/styleGuide)
 
-**Performance**
+### Performance
 
   - [On Layout & Web Performance](http://kellegous.com/j/2013/01/26/layout-performance/)
   - [String vs Array Concat](http://jsperf.com/string-vs-array-concat/2)
@@ -70,7 +33,7 @@ console.log(foo[0], bar[0]); // => 9, 9
   - [innerHTML vs textContent for script text](http://jsperf.com/innerhtml-vs-textcontent-for-script-text)
   - [Long String Concatenation](http://jsperf.com/ya-string-concat)
 
-**Books**
+### Books
 
   - [JavaScript: The Good Parts](http://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742) - Douglas Crockford
   - [JavaScript Patterns](http://www.amazon.com/JavaScript-Patterns-Stoyan-Stefanov/dp/0596806752) - Stoyan Stefanov
@@ -81,7 +44,7 @@ console.log(foo[0], bar[0]); // => 9, 9
   - [Pro JavaScript Techniques](http://www.amazon.com/Pro-JavaScript-Techniques-John-Resig/dp/1590597273) - John Resig
   - [Smashing Node.js: JavaScript Everywhere](http://www.amazon.com/Smashing-Node-js-JavaScript-Everywhere-Magazine/dp/1119962595) - Guillermo Rauch
 
-**Blogs**
+### Blogs
 
   - [DailyJS](http://dailyjs.com/)
   - [JavaScript Weekly](http://javascriptweekly.com/)

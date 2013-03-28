@@ -345,8 +345,8 @@ Modules that export an object only use `exports` and they do NOT use `module.exp
 **`fruits.coffee`**
 
 ``` coffeescript
-util = require 'util'
 fs = require 'fs'
+util = require 'util'
 
 exports.CONSTANT = CONSTANT = 1000
 
@@ -366,8 +366,8 @@ Modules that export a single function always export using `module.exports = <nam
 **`Fruit.coffee`**
 
 ``` coffeescript
-util = require 'util'
 fs = require 'fs'
+util = require 'util'
 
 CONSTANT = 1000
 
@@ -390,9 +390,10 @@ Fruit::isRipe = ->
 
   - [CoffeeScript Documentation](http://coffeescript.org/)
 
-### Style guides
+### Other style guides
 
   - [Polar Mobile CoffeeScript Style Guide](https://github.com/polarmobile/coffeescript-style-guide)
+  - [CoffeeScript Wiki](https://github.com/jashkenas/coffee-script/wiki)
 
 See [JavaScript resources](javascript.md#resources).
 

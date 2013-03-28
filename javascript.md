@@ -365,7 +365,7 @@ Thus, when objects are created with a regular set of properties, using a constru
 
 For performance reasons, the properties of a typed object should not be changed after instantiation. New properties should not be added dynamically, and properties should not be removed with a `delete` statement. Instead, properties that are only sometimes existant should be initialized to `null` in the constructor and cleared via a set to `null`. Adding properties dynamically and `delete` should ideally only be used on objects that act as maps.
 
-Arrays should be avoided as containers of mixed values, and they should only be used to contain lists of a single type.
+Arrays should be avoided as containers of mixed types; they should only be used to represent lists of a single type.
 
 ``` javascript
 // No
@@ -430,10 +430,125 @@ library.add(book);
 
 ## Conditionals
 
+Omit curly braces for `if` statements that fit on one line and that don't have an `else`. Always write `if` statements that have an `else` on multiple lines and use curly braces.
+
+``` javascript
+// No
+if (isNew) onNew();
+else onOld();
+
+// No
+if (isNew)
+  onNew();
+else
+  onOld();
+
+// Yes
+if (isNew) {
+  onNew();
+} else {
+  onOld();
+}
+
+// Yes
+if (err) callback(err);
+```
+
+To avoid nesting of `if` statements, always return a function's value as early as possible.
+
+``` javascript
+// No
+function isPercentage(val) {
+  if (val >= 0) {
+    if (val < 100) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
+
+// Yes
+function isPercentage(val) {
+  if (val < 0) return false;
+  if (val > 100) return false;
+  return true;
+}
+```
+
 **[[⬆]](#table-of-contents)**
 
 
 ## Loops and comprehensions
+
+Prefer `for` loops and not Array#forEach in cases where a closure wrapper is not needed.
+
+``` javascript
+// No
+items.forEach(function(item) {
+  console.log(item);
+});
+
+// Yes
+for (var i = 0, len = items.length; i < len; i++) {
+  var item = items[i];
+  console.log(item);
+}
+```
+
+Like returning early from a function, use `continue` to avoid nesting of conditionals in loops.
+
+``` javascript
+// No
+var results = [];
+for (var i = 0, len = values.length; i < len; i++) {
+  var value = values[i];
+  if (value >= threshold) {
+    results.push(value);
+  }
+}
+
+// Yes
+var results = [];
+for (var i = 0, len = values.length; i < len; i++) {
+  var value = values[i];
+  if (value < threshold) continue;
+  results.push(value);
+}
+```
+
+Use the following canonical forms of loops:
+
+``` javascript
+// Loop forwards
+for (var i = 0, len = items.length; i < len; i++) {
+  var item = items[i];
+  // ...
+}
+
+// Loop backwards
+for (var i = items.length; i--;) {
+  var item = items[i];
+  // ...
+}
+
+// Loop until undefined
+while (node.firstChild) {
+  node.removeChild(node.firstChild);
+}
+
+// Loop over Node.childNodes (about 3x faster than iterating through childNodes by index)
+for (var node = parent.firstChild; node; node = node.nextSibling) {
+  // ...
+}
+
+// Loop over Element.children (about 3x faster than iterating through children by index)
+for (var el = parent.firstElementChild; el; el = el.nextElementSibling) {
+  // ...
+}
+```
 
 **[[⬆]](#table-of-contents)**
 
@@ -484,8 +599,8 @@ Modules that export an object only use `exports` and they do NOT use `module.exp
 **`fruits.js`**
 
 ``` javascript
-var util = require('util');
 var fs = require('fs');
+var util = require('util');
 
 var TIMEOUT = 1000;
 
@@ -515,8 +630,8 @@ They always export using `module.exports = <name>`.
 **`Fruit.coffee`**
 
 ``` javascript
-var util = require('util');
 var fs = require('fs');
+var util = require('util');
 
 var TIMEOUT = 1000;
 
@@ -542,10 +657,10 @@ Fruit.prototype.isRipe = function() {
 
   - [Annotated ECMAScript 5.1](http://es5.github.com/)
 
-### Other styleguides
+### Other style guides
 
-  - [npm Coding Style](https://npmjs.org/doc/coding-style.html)
   - [Felix's Node.js Style Guide](http://nodeguide.com/style.html)
+  - [npm Coding Style](https://npmjs.org/doc/coding-style.html)
   - [Google JavaScript Style Guide](http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml)
   - [jQuery JavaScript Style Guide](http://contribute.jquery.org/style-guide/js/)
   - [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)

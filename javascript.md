@@ -95,7 +95,6 @@ Abbreviations especially for use in Share and Racer:
   - `op` - Operation
   - `doc` - Data document
   - `v` - Version
-  - `txn` - Transaction
   - `db` - Database
 
 When iterators are nested or functions that take a callback are nested, use specific names for the different callbacks or indices.

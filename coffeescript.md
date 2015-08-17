@@ -22,8 +22,6 @@
 
 See [JavaScript Style Guide](javascript.md#banned-features).
 
-In addition, do not use CoffeeScript classes.
-
 ### Gotchas
 
 CoffeeScript implicitly returns from every function and statement. This is a problem for constructor functions (which shouldn't return anything) and functions that might produce complex return values by accident. To avoid this problem, always write an explicit `return` at the end of function constructors and functions that end in a loop or conditional.
